@@ -1,5 +1,6 @@
 import os
 from dotted.collection import DottedDict
+from collections.abc import MutableSequence
 
 def process_options(opt, mode='train'):
     res = DottedDict({})

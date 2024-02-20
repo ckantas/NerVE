@@ -182,8 +182,10 @@ class EdgeCubeNet(nn.Module):
             out_cube = out_cube.squeeze(-1)
         else:
             out_cube = out_cube[:,0] < out_cube[:,1]
-
+        
         # out_cube = (out_cube > 0.5).squeeze(-1)
+        #print(out_cube.is_cuda)
+        cid = cid.to(out_cube.device)
         peid = cid[out_cube]
         edge_topo = {
             'grid_size': k,
@@ -286,6 +288,7 @@ class EdgeFaceNet(nn.Module):
             return None
 
         cube_edge_feat = topo_feat[peid[:,0], peid[:,1],peid[:,2]]
+        self.cube_neighbor = self.cube_neighbor.to(peid.device)
         peid_nn = peid[:,None,:] + self.cube_neighbor
         peid_nn = peid_nn.reshape(N_e*3, 3)
         torch.clamp_(peid_nn, 0, k-1)
