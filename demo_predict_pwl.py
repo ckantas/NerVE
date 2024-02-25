@@ -14,7 +14,7 @@ device = torch.device('cuda')
 demo_config = {
     'data_path': op.join(ROOT_path, 'demo'),
     'file_list': op.join(ROOT_path, 'demo', 'data_list.txt'),
-    'pc_file': 'pc_obj.ply',
+    'pc_file': 'pc_obj.pkl',
     'grid_size': 64,
     'cube_shift_mode': 'None'
 }
